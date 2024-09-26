@@ -69,10 +69,11 @@ try {
     }
     const user = jwt.verify(token, secretkey )
     console.log(user);
+      const currentuser =   await usermodel.findOne({email:user.email})
     if (!user) {
        res.status(402).send({message:"jwt malformed", status:false}) 
     }else{
-       return res.status(200).send({message:"token verified", status:true})
+       return res.status(200).send({message:"token verified", status:true, currentuser})
     }
 } catch (error) {
     console.log(error);
